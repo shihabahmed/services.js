@@ -79,10 +79,10 @@
 		}
 	</style>
 
-	<link rel="stylesheet" href="js/prism/prism.min.css">
+	<link rel="stylesheet" href="demo/js/prism/prism.min.css">
 
-	<script src="js/jquery-1.11.js"></script>
-	<script src="js/prism/prism.min.js"></script>
+	<script src="demo/js/jquery-1.11.js"></script>
+	<script src="demo/js/prism/prism.min.js"></script>
 </head>
 <body>
 	<fieldset>
@@ -123,6 +123,16 @@
 		// do something if clicked 'Submit'
     }
 });</code></pre>
+	</fieldset>
+
+	<br>
+
+	<fieldset>
+		<legend>Service.PasswordChecker</legend>
+		To add strength indicator for a password field.<br />
+		<pre><code class="language-markup">&lt;input type="password" class="password-field" /&gt;
+</code></pre>
+		<pre><code class="language-javascript">Service.PasswordChecker.init('.password-field');</code></pre>
 	</fieldset>
 
 	<br>
