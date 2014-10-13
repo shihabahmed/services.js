@@ -34,4 +34,4 @@ Some handy js functions.
 **Service.DomReady**
 
 
-<code>**doc.html**</code> contains details on implementation
+<code>**doc.html**</code> contains details on implementation.
