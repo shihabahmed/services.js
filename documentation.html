@@ -3,7 +3,7 @@
 <head>
 	<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,500,600,700" />
 	<meta content="text/html; charset=windows-1252" http-equiv="content-type">
-	<title>ReadMe</title>
+	<title>Documentation</title>
 
 	<style type="text/css">
 		* {
@@ -158,6 +158,25 @@ Service.Loader.hide('.contentLoader');</code></pre>
 		Scrolls to a specific element in the page.
 		<pre><code class="language-javascript">Service.ScrollTo('h3', [optionalMarginForScrollTo]);</code></pre>
 		<p><code>margin</code> is an integer which, if not set or set to 0, the element scrolled to, will be touching the top edge of the browser window.</p>
+	</fieldset>
+
+	<br>
+
+	<fieldset>
+		<legend>Service.Masonry</legend>
+		Apply <a href="http://desandro.github.io/masonry/" target="_blank">Masonry</a> on a list of box like elements.<br />
+		<pre><code class="language-markup">&lt;ul class="container" &gt;
+	&lt;li&gt;Item 1&lt;/li&gt;
+	&lt;li&gt;Item 2&lt;/li&gt;
+	&lt;li&gt;Item 3&lt;/li&gt;
+	...
+	&lt;li&gt;Item 15&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+		<pre><code class="language-javascript">Service.Masonry.init('.container'); // Initialize the grid
+Service.Masonry.resizeGrid('.container'); // Resets the grid
+Service.Masonry.update('.container', newItems); // Rearranges the grid with new items
+Service.Masonry.destroy('.container'); // Removes grid layout functionality</code></pre>
 	</fieldset>
 
 	<br>

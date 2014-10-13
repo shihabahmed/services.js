@@ -19,11 +19,13 @@ Some handy js functions.
 
 **Service.Prompt**: Shows prompt dialog.
 
-**Service.Loader**: Shows/Hides circular ajax loader.
-
 **Service.PasswordChecker**: Adds a password strength checker.
 
+**Service.Loader**: Shows/Hides circular ajax loader.
+
 **Service.ScrollTo**: Scrolls to a specific element in the page.
+
+**Service.Masonry**: Apply <a target="_blank" href="http://desandro.github.io/masonry/">Masonry</a> on a list of box like elements.
 
 **Service.WindowScroll**
 
