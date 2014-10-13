@@ -11,7 +11,7 @@ Some handy js functions.
 
 **Note**: <code>**heartcode-canvasloader-min.js**</code> should be loaded **BEFORE** <code>**heartcode-canvasloader-helper.js**</code> in browser.
 
-##Services
+##Available Services
 
 **Service.Popup**: Shows/Hides alert message.
 
