@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700' rel='stylesheet' type='text/css'>
+
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Services</title>
+
+	<link media="all" rel="stylesheet" href="css/default.css" />
+	<link media="all" rel="stylesheet" href="css/styles.css" />
+	<link media="all" rel="stylesheet" href="css/devices.css" />
+
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+
+	<script src="../heartcode-canvasloader-min.js"></script>
+	<script src="../heartcode-canvasloader-helper.js"></script>
+	<script src="../passwordStrength.js"></script>
+	<script src="../Services.js"></script>
+	<script src="js/scripts.js"></script>
+</head>
+<body>
+	<div>
+		<input type="text" class="password"/><br>
+		<button class="btn-loader" data-loader data-color="#0000ff">Show Loader</button>
+		<button class="btnHide-loader" style="display:none;">Hide Loader</button>
+	</div>
+	<div class="loader" data-loader style="height:60px; width: 120px;"
+		data-shape="spiral"
+		data-color="#ff0000"
+		data-density="50"
+		data-range="1"
+		data-speed="2"
+		data-fps="25"></div>
+
+	<script>
+		function init() {
+			Service.PasswordChecker.init('.password');
+			Service.Loader.show('.loader');
+
+			jQuery('.btn-loader').click(function() {
+				Service.Loader.show('.btn-loader');
+				jQuery('.btnHide-loader').fadeIn();
+			});
+
+			jQuery('.btnHide-loader').click(function() {
+				jQuery(this).fadeOut();
+				jQuery('.btn-loader').removeAttr('disabled');
+				Service.Loader.hide('.btn-loader');
+			});
+		}
+
+		Service.DomReady.add(init);
+	</script>
+</body>
+</html>

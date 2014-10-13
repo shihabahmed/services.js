@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,500,600,700" />
+	<meta content="text/html; charset=windows-1252" http-equiv="content-type">
+	<title>ReadMe</title>
+
+	<style type="text/css">
+		* {
+			font-family: Roboto;
+		}
+
+		body {
+			padding: 20px 120px;
+		}
+
+		fieldset {
+			font-size: 13px;
+			padding: 0 10px;
+		}
+
+			fieldset legend {
+				font-size: 15px;
+				font-weight: bold;
+				letter-spacing: 0.7px;
+				padding: 0 7px 0 5px;
+				margin: 10px 0;
+			}
+
+			fieldset > code, fieldset > .code,
+			fieldset > p > code, fieldset > p > .code {
+				font-weight: bold;
+			}
+
+		code, code *, .code, .code * {
+			font-family: 'Courier New', Courier, 'Nimbus Mono L', monospace !important;
+			font-size: 14px;
+			line-height: 22px;
+		}
+
+			code span.ns {
+				color: #FF6E00;
+				font-weight: bold;
+			}
+			code span.optional {
+				font-style: italic;
+				color: #999;
+			}
+
+		.comment, .comment * {
+			color: #808080 !important;
+		}
+
+		pre[class*="language-"] {
+			box-shadow: 0 0 5px #a4a4a4;
+			margin-bottom: 15px !important;
+		}
+
+			pre[class*="language-"] > code[data-language] {
+				display: block;
+				max-height: 100% !important;
+				overflow: auto !important;
+			}
+
+			pre[class*="language-"]:hover > code[data-language]:before {
+				visibility: hidden;
+			}
+
+		.token.function {
+			color: #042B7E;
+		}
+
+		.token.lf:before {
+			display: none;
+		}
+
+		.token.tab:not(:empty):before {
+			display: none;
+		}
+	</style>
+
+	<link rel="stylesheet" href="js/prism/prism.min.css">
+
+	<script src="js/jquery-1.11.js"></script>
+	<script src="js/prism/prism.min.js"></script>
+</head>
+<body>
+	<fieldset>
+		<legend>Service.Popup</legend>
+		Show alert message.
+		<pre><code class="language-javascript">Service.Popup.show({
+	titlebar: true, // whether to show the title bar
+	title: 'Message', // Title of the box (when the title bar is visible)
+	message: 'This is the message content...', // message to show
+	timeout: 0 // if value &gt; 0, alert box will automatically disappear after given seconds<br>
+});</code></pre>
+	</fieldset>
+
+	<br>
+
+	<fieldset>
+		<legend>Service.Confirm</legend>
+		Show confirmation dialog.
+		<pre><code class="language-javascript">Service.Confirm.show({
+	titlebar: true, // whether to show the title bar
+	title: 'Message', // Title of the box (when the title bar is visible)
+	message: 'This is the message content...', //message to show
+	yes: function () { }, // callback function to call when clicked "Yes"
+	no: function () { } // callback function to call when clicked "No"
+});</code></pre>
+	</fieldset>
+
+	<br>
+
+	<fieldset>
+		<legend>Service.Prompt</legend>
+		Show prompt dialog.
+		<pre><code class="language-javascript">Service.Prompt.show({
+	title: 'Message', // Title of the box
+	height: 80, // Height of the textarea
+	placeholder: 'Write your message here...', // Placeholder text
+	onSubmit: function(message) {
+		// do something if clicked 'Submit'
+    }
+});</code></pre>
+	</fieldset>
+
+	<br>
+
+	<fieldset>
+		<legend>Service.Loader</legend>
+		To show loader on a button/div, add class <code>loader</code>, then call <code>show()</code>.<br />
+		<pre><code class="language-markup">&lt;button class="btnSubmit" data-loader&gt;Submit&lt;/button&gt;
+&lt;input type="button" value="Submit" class="btnSubmit" data-loader /&gt;
+&lt;div class="contentLoader" data-loader&gt;&lt;/div&gt;
+</code></pre>
+		<pre><code class="language-javascript">Service.Loader.show('.btnSubmit');
+Service.Loader.show('.contentLoader');</code></pre>
+		To hide a specific loader, call <code>hide()</code> as below.
+		<pre><code class="language-javascript">Service.Loader.hide('.btnSubmit');
+Service.Loader.hide('.contentLoader');</code></pre>
+	</fieldset>
+
+	<br>
+
+	<fieldset>
+		<legend>Service.ScrollTo</legend>
+		Scrolls to a specific element in the page.
+		<pre><code class="language-javascript">Service.ScrollTo('h3', [optionalMarginForScrollTo]);</code></pre>
+		<p><code>margin</code> is an integer which, if not set or set to 0, the element scrolled to, will be touching the top edge of the browser window.</p>
+	</fieldset>
+
+	<br>
+
+	<fieldset>
+		<legend>Service.WindowScroll</legend>
+		If you need to run some javascript code on <code>window.scroll</code> event, put those code in a function.
+		<pre><code class="language-javascript">function init() {
+	// your js code...
+}
+
+function anotherFunction(a) {
+	// do something with 'a'...
+}</code></pre>
+		and then..
+		<pre><code class="language-javascript">Service.WindowScroll.add(init);
+Service.WindowScroll.add(anotherFunction, a);</code></pre>
+		At a certain point if you don't want a function to run every time the window is scrolled..
+		<pre><code class="language-javascript">Service.WindowScroll.remove(anotherFunction);</code></pre>
+	</fieldset>
+
+	<br>
+
+	<fieldset>
+		<legend>Service.WindowLoad</legend>
+		Works the same way as <span class="code">Service.WindowScroll</span> but for <code>window.load</code> event.
+		<pre><code class="language-javascript">Service.WindowLoad.add(init);
+Service.WindowLoad.add(anotherFunction, a);</code></pre>
+		<pre><code class="language-javascript">Service.WindowLoad.remove(anotherFunction);</code></pre>
+	</fieldset>
+
+	<br>
+
+	<fieldset>
+		<legend>Service.WindowResize</legend>
+		Works the same way as <span class="code">Service.WindowScroll</span> but for <code>window.resize</code> event.
+		<pre><code class="language-javascript">Service.WindowResize.add(init);
+Service.WindowResize.add(anotherFunction, a);</code></pre>
+		<pre><code class="language-javascript">Service.WindowResize.remove(anotherFunction);</code></pre>
+	</fieldset>
+
+	<br>
+
+	<fieldset>
+		<legend>Service.DomReady</legend>
+		Works the same way as <span class="code">Service.WindowScroll</span> but for <code>document.ready</code> event.
+		<pre><code class="language-javascript">Service.DomReady.add(init);
+Service.DomReady.add(anotherFunction, a);</code></pre>
+		<pre><code class="language-javascript">Service.DomReady.remove(anotherFunction);</code></pre>
+	</fieldset>
+
+
+
+	<script>
+		setTimeout(function () {
+			document.body.innerHTML = document.body.innerHTML
+										.replace(/Service/g, '<span class="ns">Service</span>')
+										.replace(/optionalMarginForScrollTo/g, '<span class="optional" title="optional">margin</span>');
+		}, 500);
+	</script>
+</body>
+</html>
