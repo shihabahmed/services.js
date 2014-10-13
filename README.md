@@ -3,11 +3,11 @@
 Some handy js functions.
 
 ##Dependency
-1. jQuery 1.4+
-2. Twitter Bootstrap
-3. passwordStrength.js (included)
-4. heartcode-canvasloader-min.js(included)
-5. heartcode-canvasloader-helper.js(included)
+1. <a target="_blank" href="http://jquery.com/">jQuery 1.4+</a>
+2. <a target="_blank" href="http://getbootstrap.com/">Bootstrap</a>
+3. <a target="_blank" href="http://desandro.github.io/masonry/">jQuery Masonry</a>
+4. passwordStrength.js (included)
+5. heartcode-canvasloader-min.js(included)
 
 **Note**: <code>**heartcode-canvasloader-min.js**</code> should be loaded **BEFORE** <code>**heartcode-canvasloader-helper.js**</code> in browser.
 
