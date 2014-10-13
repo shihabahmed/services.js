@@ -1,4 +1,4 @@
-#Services
+#services.js
 
 Some handy js functions.
 
