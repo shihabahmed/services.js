@@ -9,7 +9,7 @@ Some handy js functions.
 4. heartcode-canvasloader-min.js(included)
 5. heartcode-canvasloader-helper.js(included)
 
-**Note**: <code>**heartcode-canvasloader-min.js**</code> should be loaded <span style="color:#00f;">BEFORE</span> <code>**heartcode-canvasloader-helper.js**</code> in browser.
+**Note**: <code>**heartcode-canvasloader-min.js**</code> should be loaded <i style="color:#00f;">BEFORE</i> <code>**heartcode-canvasloader-helper.js**</code> in browser.
 
 ##Features
 
