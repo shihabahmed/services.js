@@ -9,7 +9,6 @@ Some handy js functions.
 4. passwordStrength.js (included)
 5. heartcode-canvasloader-min.js(included)
 
-**Note**: <code>**heartcode-canvasloader-min.js**</code> should be loaded **BEFORE** <code>**heartcode-canvasloader-helper.js**</code> in browser.
 
 ##Features
 
