@@ -358,6 +358,7 @@ Service.Prompt = (function (j) {
 		    title: 'Message',
 		    height: 80,
 		    placeholder: 'Write your message here...',
+            validation: 'You must write a message.',
 		    onSubmit: function (message) { }
 		},
 		popupHTML = '<div class="modal fade" id="promptDialog" tabindex="-1" role="dialog" aria-labelledby="msgBoxTitle" aria-hidden="true">' +
@@ -369,6 +370,7 @@ Service.Prompt = (function (j) {
 					'			</div>' +
 					'			<div class="modal-body" style="padding: 12px 20px;">' +
 					' 				<textarea class="textBox" rows="4" cols="15" style="width:100%; resize: none;"></textarea>' +
+                    '               <div class="prompt-error" style="display: none; color: #f00; font-size: 90%; margin-top: 4px;"></div>' +
 					'			</div>' +
 					'			<div class="modal-footer" style="padding: 9px 20px 10px;">' +
                     //'		    	<em class="reportStatus" style="text-align: left;float:left;display:none;font-size:85%;max-width:60px;">Submitting report...</em>' +
@@ -380,7 +382,7 @@ Service.Prompt = (function (j) {
 					'	</div>' +
 					'</div>';
 
-    function init() {
+    function init(options) {
         if (isPromptBoxReady == false) {
             isPromptBoxReady = true;
             j('body').append(popupHTML);
@@ -407,12 +409,15 @@ Service.Prompt = (function (j) {
                 });
 
                 if (prompt.message.length > 0) {
+                    jMsgBody.css('padding-bottom', 12).children('.prompt-error').hide().text("");
                     btnSubmit.attr('disabled', 'disabled');
                     btnCancel.attr('disabled', 'disabled');
 
                     jReportStatus.fadeIn();
 
                     defaultOptions.onSubmit.apply(this, [prompt]);
+                } else {
+                    jMsgBody.css('padding-bottom', 0).children('.prompt-error').text(options.errorMessage).show();
                 }
             });
         }
@@ -425,13 +430,14 @@ Service.Prompt = (function (j) {
         // - - - title: 'Message',
         // - - - height: 80,
         // - - - placeholder: 'Write your message here...',
+        // - - - validation: 'This field is required.',
         // - - - onSubmit: function(message) {
         // - - - 	// do something if clicked 'Submit'
         // - - - }
         // - }
         show: function (options) {
-            init();
             j.extend(defaultOptions, options);
+            init(defaultOptions);
 
             jMsgTitle.html(defaultOptions.title);
             jMsgBody.css('margin-top', 0);
