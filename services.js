@@ -417,7 +417,7 @@ Service.Prompt = (function (j) {
 
                     defaultOptions.onSubmit.apply(this, [prompt]);
                 } else {
-                    jMsgBody.css('padding-bottom', 0).children('.prompt-error').text(options.errorMessage).show();
+                    jMsgBody.css('padding-bottom', 0).children('.prompt-error').text(options.validation).show();
                 }
             });
         }
