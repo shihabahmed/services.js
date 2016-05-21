@@ -26,13 +26,6 @@ Some handy js functions.
 
 **Service.Masonry**: Apply <a target="_blank" href="http://desandro.github.io/masonry/">Masonry</a> on a list of box like elements.
 
-**Service.WindowScroll**
-
-**Service.WindowLoad**
-
-**Service.WindowResize**
-
-**Service.DomReady**
 
 
 <code>**documentation.html**</code> contains details on implementation.

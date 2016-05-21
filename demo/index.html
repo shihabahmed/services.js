@@ -50,7 +50,9 @@
 			});
 		}
 
-		Service.DomReady.add(init);
+		jQuery(function() {
+			init();
+		});
 	</script>
 </body>
 </html>
