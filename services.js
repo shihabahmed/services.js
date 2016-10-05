@@ -200,10 +200,13 @@ Service.Prompt = (function (j) {
 		isPromptBoxReady = false,
 		defaultOptions = {
 		    title: 'Message',
-		    height: 80,
+		    height: 0,
 		    placeholder: 'Write your message here...',
-            validation: 'You must write a message.',
-		    onSubmit: function (message) { }
+		    validation: 'You must write a message.',
+		    onSubmit: function (prompt) {
+			// prompt.message
+			// prompt.close()
+		    }
 		},
 		popupHTML = '<div class="modal fade" id="promptDialog" tabindex="-1" role="dialog" aria-labelledby="msgBoxTitle" aria-hidden="true">' +
 					'	<div class="modal-dialog">' +
@@ -213,14 +216,14 @@ Service.Prompt = (function (j) {
 					'	    		<h4 class="modal-title" id="promptDialogTitle"></h4>' +
 					'			</div>' +
 					'			<div class="modal-body" style="padding: 12px 20px;">' +
-					' 				<textarea class="textBox" rows="4" cols="15" style="width:100%; resize: none;"></textarea>' +
-                    '               <div class="prompt-error" style="display: none; color: #f00; font-size: 90%; margin-top: 4px;"></div>' +
+					//' 			<textarea class="textBox" rows="4" cols="15" style="width:100%; resize: none;"></textarea>' +
+					'   			<div class="prompt-error" style="display: none; color: #f00; font-size: 90%; margin-bottom: 4px;"></div>' +
 					'			</div>' +
 					'			<div class="modal-footer" style="padding: 9px 20px 10px;">' +
-                    //'		    	<em class="reportStatus" style="text-align: left;float:left;display:none;font-size:85%;max-width:60px;">Submitting report...</em>' +
-					'   			<button type="button" style="padding: 3px 16px;" class="btn btn-primary btnPrompt-Submit">Submit</button>' +
+					//'             <em class="reportStatus" style="text-align: left;float:left;display:none;font-size:85%;max-width:60px;">Submitting report...</em>' +
+					'   			<button type="button" style="padding: 3px 16px;" class="btn green btnPrompt-Submit">Submit</button>' +
 					'	    		<button type="button" style="padding: 3px 16px;" class="btn btn-danger btnPrompt-Cancel" data-dismiss="modal">Cancel</button>' +
-                    '		    	<em class="reportStatus" style="text-align: right;display:block;font-size:85%;margin-top:10px;">Submitting report...</em>' +
+					'		    	<em class="reportStatus" style="text-align: right;display:block;font-size:85%;margin-top:10px;">Submitting report...</em>' +
 					'			</div>' +
 					'		</div>' +
 					'	</div>' +
@@ -235,6 +238,13 @@ Service.Prompt = (function (j) {
             jMsgTitleBar = jMsgBox.find('.modal-header');
             jMsgTitle = jMsgBox.find('#promptDialogTitle');
             jMsgBody = jMsgBox.find('.modal-body');
+            
+            if (options.height > 0) {
+                jMsgBody.prepend('<textarea class="textBox form-control" rows="4" cols="15" style="width:100%; resize: none;"></textarea>');
+            } else {
+                jMsgBody.prepend('<input class="textBox form-control" type="text" style="width:100%;" />');
+            }
+
             jTextBox = jMsgBody.find('.textBox');
             jReportStatus = jMsgBox.find('.reportStatus');
             btnSubmit = jMsgBox.find('.btnPrompt-Submit');
@@ -272,7 +282,6 @@ Service.Prompt = (function (j) {
         // Shows a input dialog box with options (optional) provided as a JSON object.
         // - options: {
         // - - - title: 'Message',
-        // - - - height: 80,
         // - - - placeholder: 'Write your message here...',
         // - - - validation: 'This field is required.',
         // - - - onSubmit: function(message) {
@@ -286,8 +295,10 @@ Service.Prompt = (function (j) {
             jMsgTitle.html(defaultOptions.title);
             jMsgBody.css('margin-top', 0);
 
-            jTextBox.css('height', defaultOptions.height)
-					.attr('placeholder', defaultOptions.placeholder);
+            if (defaultOptions.height > 0) {
+                jTextBox.css('height', defaultOptions.height);
+            }
+            jTextBox.attr('placeholder', defaultOptions.placeholder);
 
             jReportStatus.hide();
             btnSubmit.removeAttr('disabled');
