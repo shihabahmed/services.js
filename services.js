@@ -9,6 +9,59 @@
 
 var Service = {};
 
+Service.WindowLoad = (function() {
+    var windowLoad_fn = {},
+        fn, fnName, params = [];
+
+    return {
+        // Add a function with params (optional and provided as comma seperated values) to run once window loaded.
+        add: function(fn, params) {
+            fnName = fn.name;
+            params = Array.prototype.slice.apply(arguments).slice(1);
+            windowLoad_fn[fn.name] = {
+                fn: fn,
+                params: params
+            };
+        },
+
+        // Returns the list of functions and their names.
+        list: (function() {
+            return {
+                names: function() {
+                    return Object.keys(windowLoad_fn);
+                },
+                functions: function() {
+                    return Object.keys(windowLoad_fn).map(function(name) {
+                        return windowLoad_fn[name].fn;
+                    });
+                }
+            };
+        })(),
+
+        // Remove a function from the list of functions to run when once window loaded.
+        remove: function(fn) {
+            fn = (typeof fn === 'string' ? fn : '');
+            delete windowLoad_fn[fn];
+        },
+
+        // Call all the functions added to a list using add().
+        call: function() {
+            var fnNames = Object.keys(windowLoad_fn),
+                fnLength = fnNames.length;
+            if (fnLength > 0) {
+                for (var i = 0; i < fnLength; i++) {
+                    fnName = windowLoad_fn[fnNames[i]];
+                    if (typeof fnName.fn === 'function') {
+                        fnName.fn.apply(this, fnName.params);
+                    }
+                }
+            } else {
+                console.log('No function has been bound to the window load event.');
+            }
+        }
+    }
+})();
+
 Service.Popup = (function (j) {
     var jMsgBox, jMsgTitleBar, jMsgTitle, jMsgBody, btnOK, jTimer,
 		isHtmlReady = false, popupInterval, timer, timeLeft,
