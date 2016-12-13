@@ -1,12 +1,3 @@
-/*!
- * imagesLoaded PACKAGED v3.1.4
- * JavaScript is all like "You images are done yet or what?"
- * MIT License
- */
-
-(function(){function e(){}function t(e,t){for(var n=e.length;n--;)if(e[n].listener===t)return n;return-1}function n(e){return function(){return this[e].apply(this,arguments)}}var i=e.prototype,r=this,o=r.EventEmitter;i.getListeners=function(e){var t,n,i=this._getEvents();if("object"==typeof e){t={};for(n in i)i.hasOwnProperty(n)&&e.test(n)&&(t[n]=i[n])}else t=i[e]||(i[e]=[]);return t},i.flattenListeners=function(e){var t,n=[];for(t=0;e.length>t;t+=1)n.push(e[t].listener);return n},i.getListenersAsObject=function(e){var t,n=this.getListeners(e);return n instanceof Array&&(t={},t[e]=n),t||n},i.addListener=function(e,n){var i,r=this.getListenersAsObject(e),o="object"==typeof n;for(i in r)r.hasOwnProperty(i)&&-1===t(r[i],n)&&r[i].push(o?n:{listener:n,once:!1});return this},i.on=n("addListener"),i.addOnceListener=function(e,t){return this.addListener(e,{listener:t,once:!0})},i.once=n("addOnceListener"),i.defineEvent=function(e){return this.getListeners(e),this},i.defineEvents=function(e){for(var t=0;e.length>t;t+=1)this.defineEvent(e[t]);return this},i.removeListener=function(e,n){var i,r,o=this.getListenersAsObject(e);for(r in o)o.hasOwnProperty(r)&&(i=t(o[r],n),-1!==i&&o[r].splice(i,1));return this},i.off=n("removeListener"),i.addListeners=function(e,t){return this.manipulateListeners(!1,e,t)},i.removeListeners=function(e,t){return this.manipulateListeners(!0,e,t)},i.manipulateListeners=function(e,t,n){var i,r,o=e?this.removeListener:this.addListener,s=e?this.removeListeners:this.addListeners;if("object"!=typeof t||t instanceof RegExp)for(i=n.length;i--;)o.call(this,t,n[i]);else for(i in t)t.hasOwnProperty(i)&&(r=t[i])&&("function"==typeof r?o.call(this,i,r):s.call(this,i,r));return this},i.removeEvent=function(e){var t,n=typeof e,i=this._getEvents();if("string"===n)delete i[e];else if("object"===n)for(t in i)i.hasOwnProperty(t)&&e.test(t)&&delete i[t];else delete this._events;return this},i.removeAllListeners=n("removeEvent"),i.emitEvent=function(e,t){var n,i,r,o,s=this.getListenersAsObject(e);for(r in s)if(s.hasOwnProperty(r))for(i=s[r].length;i--;)n=s[r][i],n.once===!0&&this.removeListener(e,n.listener),o=n.listener.apply(this,t||[]),o===this._getOnceReturnValue()&&this.removeListener(e,n.listener);return this},i.trigger=n("emitEvent"),i.emit=function(e){var t=Array.prototype.slice.call(arguments,1);return this.emitEvent(e,t)},i.setOnceReturnValue=function(e){return this._onceReturnValue=e,this},i._getOnceReturnValue=function(){return this.hasOwnProperty("_onceReturnValue")?this._onceReturnValue:!0},i._getEvents=function(){return this._events||(this._events={})},e.noConflict=function(){return r.EventEmitter=o,e},"function"==typeof define&&define.amd?define("eventEmitter/EventEmitter",[],function(){return e}):"object"==typeof module&&module.exports?module.exports=e:this.EventEmitter=e}).call(this),function(e){function t(t){var n=e.event;return n.target=n.target||n.srcElement||t,n}var n=document.documentElement,i=function(){};n.addEventListener?i=function(e,t,n){e.addEventListener(t,n,!1)}:n.attachEvent&&(i=function(e,n,i){e[n+i]=i.handleEvent?function(){var n=t(e);i.handleEvent.call(i,n)}:function(){var n=t(e);i.call(e,n)},e.attachEvent("on"+n,e[n+i])});var r=function(){};n.removeEventListener?r=function(e,t,n){e.removeEventListener(t,n,!1)}:n.detachEvent&&(r=function(e,t,n){e.detachEvent("on"+t,e[t+n]);try{delete e[t+n]}catch(i){e[t+n]=void 0}});var o={bind:i,unbind:r};"function"==typeof define&&define.amd?define("eventie/eventie",o):e.eventie=o}(this),function(e,t){"function"==typeof define&&define.amd?define(["eventEmitter/EventEmitter","eventie/eventie"],function(n,i){return t(e,n,i)}):"object"==typeof exports?module.exports=t(e,require("eventEmitter"),require("eventie")):e.imagesLoaded=t(e,e.EventEmitter,e.eventie)}(this,function(e,t,n){function i(e,t){for(var n in t)e[n]=t[n];return e}function r(e){return"[object Array]"===d.call(e)}function o(e){var t=[];if(r(e))t=e;else if("number"==typeof e.length)for(var n=0,i=e.length;i>n;n++)t.push(e[n]);else t.push(e);return t}function s(e,t,n){if(!(this instanceof s))return new s(e,t);"string"==typeof e&&(e=document.querySelectorAll(e)),this.elements=o(e),this.options=i({},this.options),"function"==typeof t?n=t:i(this.options,t),n&&this.on("always",n),this.getImages(),a&&(this.jqDeferred=new a.Deferred);var r=this;setTimeout(function(){r.check()})}function c(e){this.img=e}function f(e){this.src=e,v[e]=this}var a=e.jQuery,u=e.console,h=u!==void 0,d=Object.prototype.toString;s.prototype=new t,s.prototype.options={},s.prototype.getImages=function(){this.images=[];for(var e=0,t=this.elements.length;t>e;e++){var n=this.elements[e];"IMG"===n.nodeName&&this.addImage(n);for(var i=n.querySelectorAll("img"),r=0,o=i.length;o>r;r++){var s=i[r];this.addImage(s)}}},s.prototype.addImage=function(e){var t=new c(e);this.images.push(t)},s.prototype.check=function(){function e(e,r){return t.options.debug&&h&&u.log("confirm",e,r),t.progress(e),n++,n===i&&t.complete(),!0}var t=this,n=0,i=this.images.length;if(this.hasAnyBroken=!1,!i)return this.complete(),void 0;for(var r=0;i>r;r++){var o=this.images[r];o.on("confirm",e),o.check()}},s.prototype.progress=function(e){this.hasAnyBroken=this.hasAnyBroken||!e.isLoaded;var t=this;setTimeout(function(){t.emit("progress",t,e),t.jqDeferred&&t.jqDeferred.notify&&t.jqDeferred.notify(t,e)})},s.prototype.complete=function(){var e=this.hasAnyBroken?"fail":"done";this.isComplete=!0;var t=this;setTimeout(function(){if(t.emit(e,t),t.emit("always",t),t.jqDeferred){var n=t.hasAnyBroken?"reject":"resolve";t.jqDeferred[n](t)}})},a&&(a.fn.imagesLoaded=function(e,t){var n=new s(this,e,t);return n.jqDeferred.promise(a(this))}),c.prototype=new t,c.prototype.check=function(){var e=v[this.img.src]||new f(this.img.src);if(e.isConfirmed)return this.confirm(e.isLoaded,"cached was confirmed"),void 0;if(this.img.complete&&void 0!==this.img.naturalWidth)return this.confirm(0!==this.img.naturalWidth,"naturalWidth"),void 0;var t=this;e.on("confirm",function(e,n){return t.confirm(e.isLoaded,n),!0}),e.check()},c.prototype.confirm=function(e,t){this.isLoaded=e,this.emit("confirm",this,t)};var v={};return f.prototype=new t,f.prototype.check=function(){if(!this.isChecked){var e=new Image;n.bind(e,"load",this),n.bind(e,"error",this),e.src=this.src,this.isChecked=!0}},f.prototype.handleEvent=function(e){var t="on"+e.type;this[t]&&this[t](e)},f.prototype.onload=function(e){this.confirm(!0,"onload"),this.unbindProxyEvents(e)},f.prototype.onerror=function(e){this.confirm(!1,"onerror"),this.unbindProxyEvents(e)},f.prototype.confirm=function(e,t){this.isConfirmed=!0,this.isLoaded=e,this.emit("confirm",this,t)},f.prototype.unbindProxyEvents=function(e){n.unbind(e.target,"load",this),n.unbind(e.target,"error",this)},s});
-
-
 var Service = {};
 
 Service.WindowLoad = (function() {
@@ -24,19 +15,15 @@ Service.WindowLoad = (function() {
             };
         },
 
-        // Returns the list of functions and their names.
-        list: (function() {
-            return {
-                names: function() {
-                    return Object.keys(windowLoad_fn);
-                },
-                functions: function() {
-                    return Object.keys(windowLoad_fn).map(function(name) {
-                        return windowLoad_fn[name].fn;
-                    });
-                }
-            };
-        })(),
+        // Returns the list of functions attached to WindowLoad.
+        list: function() {
+            return Object.keys(windowLoad_fn).map(function(name) {
+                return {
+                    name: name,
+                    fn: windowLoad_fn[name].fn
+                };
+            });
+        },
 
         // Remove a function from the list of functions to run when once window loaded.
         remove: function(fn) {
@@ -44,7 +31,7 @@ Service.WindowLoad = (function() {
             delete windowLoad_fn[fn];
         },
 
-        // Call all the functions added to a list using add().
+        // Call all the functions attached to WindowLoad using add().
         call: function() {
             var fnNames = Object.keys(windowLoad_fn),
                 fnLength = fnNames.length;
@@ -62,33 +49,83 @@ Service.WindowLoad = (function() {
     }
 })();
 
-Service.Popup = (function (j) {
+Service.WindowResize = (function() {
+    var windowResize_fn = {},
+        fn, fnName, params = [];
+
+    return {
+        // Add a function with params (optional and provided as comma seperated values) to run once window is resized.
+        add: function(fn, params) {
+            fnName = fn.name;
+            params = Array.prototype.slice.apply(arguments).slice(1);
+            windowResize_fn[fn.name] = {
+                fn: fn,
+                params: params
+            };
+        },
+
+        // Returns the list of functions attached to WindowResize.
+        list: function() {
+            return Object.keys(windowResize_fn).map(function(name) {
+                return {
+                    name: name,
+                    fn: windowResize_fn[name].fn
+                };
+            });
+        },
+
+        // Remove a function from the list of functions to run when once window is resized.
+        remove: function(fn) {
+            fn = (typeof fn === 'string' ? fn : '');
+            delete windowResize_fn[fn];
+        },
+
+        // Call all the functions attached to WindowResize using add().
+        call: function() {
+            var fnNames = Object.keys(windowResize_fn),
+                fnLength = fnNames.length;
+            if (fnLength > 0) {
+                for (var i = 0; i < fnLength; i++) {
+                    fnName = windowResize_fn[fnNames[i]];
+                    if (typeof fnName.fn === 'function') {
+                        fnName.fn.apply(this, fnName.params);
+                    }
+                }
+            } else {
+                console.log('No function has been bound to the window resize event.');
+            }
+        }
+    }
+})();
+
+Service.Popup = (function(j) {
     var jMsgBox, jMsgTitleBar, jMsgTitle, jMsgBody, btnOK, jTimer,
-		isHtmlReady = false, popupInterval, timer, timeLeft,
-		defaultOptions = {
-		    titlebar: true,
-		    title: 'Message',
-		    message: 'This is the message content...',
-		    timeout: 0
-		},
-		popupHTML = '<div class="modal fade" id="msgBox" tabindex="-1" role="dialog" aria-labelledby="msgBoxTitle" aria-hidden="true">' +
-					'	<div class="modal-dialog">' +
-					'		<div class="modal-content">' +
-					'			<div class="modal-header">' +
-					'			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-					'			    <h4 class="modal-title" id="msgBoxTitle"></h4>' +
-					'			</div>' +
-					'			<div class="modal-body">' +
-					//'		    	Test content...' +
-					'			</div>' +
-					'			<div class="modal-footer" style="padding: 9px 20px 10px;">' +
-                    //'		    	<em class="msgBoxTimer" style="text-align: left;float:left;display:none;font-size:85%;max-width:175px;">This message will automatically close in <span class="time-left"></span> seconds.</em>' +
-					'   			<button type="button" class="btn btn-primary btnOK" data-dismiss="modal">OK</button>' +
-                    '		    	<em class="msgBoxTimer" style="text-align: right;display:block;font-size:85%;margin-top:10px;">This message will automatically close in <span class="time-left"></span> seconds.</em>' +
-					'			</div>' +
-					'		</div>' +
-					'	</div>' +
-					'</div>';
+        isHtmlReady = false,
+        popupInterval, timer, timeLeft,
+        defaultOptions = {
+            titlebar: true,
+            title: 'Message',
+            message: 'This is the message content...',
+            timeout: 0
+        },
+        popupHTML = '<div class="modal fade" id="msgBox" tabindex="-1" role="dialog" aria-labelledby="msgBoxTitle" aria-hidden="true">' +
+        '	<div class="modal-dialog">' +
+        '		<div class="modal-content">' +
+        '			<div class="modal-header">' +
+        '			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+        '			    <h4 class="modal-title" id="msgBoxTitle"></h4>' +
+        '			</div>' +
+        '			<div class="modal-body">' +
+        //'		    	Test content...' +
+        '			</div>' +
+        '			<div class="modal-footer" style="padding: 9px 20px 10px;">' +
+        //'		    	<em class="msgBoxTimer" style="text-align: left;float:left;display:none;font-size:85%;max-width:175px;">This message will automatically close in <span class="time-left"></span> seconds.</em>' +
+        '   			<button type="button" class="btn btn-primary btnOK" data-dismiss="modal">OK</button>' +
+        '		    	<em class="msgBoxTimer" style="text-align: right;display:block;font-size:85%;margin-top:10px;">This message will automatically close in <span class="time-left"></span> seconds.</em>' +
+        '			</div>' +
+        '		</div>' +
+        '	</div>' +
+        '</div>';
 
     function init() {
         if (isHtmlReady == false) {
@@ -113,7 +150,7 @@ Service.Popup = (function (j) {
         // - - - message: 'This is the message content...',
         // - - - timeout: 0
         // - }
-        show: function (options) {
+        show: function(options) {
             init();
             j.extend(defaultOptions, options);
 
@@ -137,7 +174,7 @@ Service.Popup = (function (j) {
                 timer = parseInt(defaultOptions.timeout);
                 timeLeft.text(timer);
 
-                popupInterval = setInterval(function () {
+                popupInterval = setInterval(function() {
                     timer -= 1;
                     timeLeft.text(timer);
                     if (timer == 0) {
@@ -155,35 +192,35 @@ Service.Popup = (function (j) {
     }
 })(jQuery);
 
-Service.Confirm = (function (j) {
+Service.Confirm = (function(j) {
     var jMsgBox, jMsgTitleBar, jMsgTitle, jMsgBody,
-		btnYes, btnNo, btnClose,
-		isConfirmBoxReady = false,
-		defaultOptions = {
-		    titlebar: true,
-		    title: 'Confirm',
-		    message: 'This is the question...',
-		    yes: function () { },
-		    no: function () { }
-		},
-		popupHTML = '<div class="modal fade" id="confirmDialog" tabindex="-1" role="dialog" aria-labelledby="msgBoxTitle" aria-hidden="true">' +
-					'	<div class="modal-dialog">' +
-					'		<div class="modal-content">' +
-					'			<div class="modal-header" style="padding: 8px 15px;">' +
-					'   			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-					'	    		<h4 class="modal-title" id="confirmDialogTitle"></h4>' +
-					'			</div>' +
-					'			<div class="modal-body" style="padding: 12px 20px;">' +
-					//' 			Test content...' +
-					'			</div>' +
-					'			<div class="modal-footer" style="padding: 9px 20px 10px;">' +
-					'   			<button type="button" style="padding: 3px 16px;" class="btn btn-primary btnConfirm-Yes">Yes</button>' +
-					'	    		<button type="button" style="padding: 3px 16px;" class="btn btn-danger btnConfirm-No">No</button>' +
-					'		    	<button type="button" style="display:none;width:0;height:0;position:absolute;z-index:-1;" class="btn btnConfirm-Close" data-dismiss="modal"></button>' +
-					'			</div>' +
-					'		</div>' +
-					'	</div>' +
-					'</div>';
+        btnYes, btnNo, btnClose,
+        isConfirmBoxReady = false,
+        defaultOptions = {
+            titlebar: true,
+            title: 'Confirm',
+            message: 'This is the question...',
+            yes: function() {},
+            no: function() {}
+        },
+        popupHTML = '<div class="modal fade" id="confirmDialog" tabindex="-1" role="dialog" aria-labelledby="msgBoxTitle" aria-hidden="true">' +
+        '	<div class="modal-dialog">' +
+        '		<div class="modal-content">' +
+        '			<div class="modal-header" style="padding: 8px 15px;">' +
+        '   			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+        '	    		<h4 class="modal-title" id="confirmDialogTitle"></h4>' +
+        '			</div>' +
+        '			<div class="modal-body" style="padding: 12px 20px;">' +
+        //' 			Test content...' +
+        '			</div>' +
+        '			<div class="modal-footer" style="padding: 9px 20px 10px;">' +
+        '   			<button type="button" style="padding: 3px 16px;" class="btn btn-primary btnConfirm-Yes">Yes</button>' +
+        '	    		<button type="button" style="padding: 3px 16px;" class="btn btn-danger btnConfirm-No">No</button>' +
+        '		    	<button type="button" style="display:none;width:0;height:0;position:absolute;z-index:-1;" class="btn btnConfirm-Close" data-dismiss="modal"></button>' +
+        '			</div>' +
+        '		</div>' +
+        '	</div>' +
+        '</div>';
 
     function init() {
         if (isConfirmBoxReady == false) {
@@ -198,12 +235,12 @@ Service.Confirm = (function (j) {
             btnNo = jMsgBox.find('.btnConfirm-No');
             btnClose = jMsgBox.find('.btnConfirm-Close');
 
-            btnYes.click(function () {
+            btnYes.click(function() {
                 defaultOptions.yes.call();
                 btnClose.click();
             });
 
-            btnNo.click(function () {
+            btnNo.click(function() {
                 defaultOptions.no.call();
                 btnClose.click();
             });
@@ -224,7 +261,7 @@ Service.Confirm = (function (j) {
         // - - - 	// do something if clicked 'NO'
         // - - - }
         // - }
-        show: function (options) {
+        show: function(options) {
             init();
             j.extend(defaultOptions, options);
 
@@ -246,41 +283,42 @@ Service.Confirm = (function (j) {
     }
 })(jQuery);
 
-Service.Prompt = (function (j) {
+Service.Prompt = (function(j) {
     var jMsgBox, jMsgTitleBar, jMsgTitle, jMsgBody, jTextBox,
-		prompt, jReportStatus,
-		btnSubmit, btnCancel, btnClose,
-		isPromptBoxReady = false,
-		defaultOptions = {
-		    title: 'Message',
-		    height: 0,
-		    placeholder: 'Write your message here...',
-		    validation: 'You must write a message.',
-		    onSubmit: function (prompt) {
-			// prompt.message
-			// prompt.close()
-		    }
-		},
-		popupHTML = '<div class="modal fade" id="promptDialog" tabindex="-1" role="dialog" aria-labelledby="msgBoxTitle" aria-hidden="true">' +
-					'	<div class="modal-dialog">' +
-					'		<div class="modal-content">' +
-					'			<div class="modal-header" style="padding: 8px 15px;">' +
-					'   			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-					'	    		<h4 class="modal-title" id="promptDialogTitle"></h4>' +
-					'			</div>' +
-					'			<div class="modal-body" style="padding: 12px 20px;">' +
-					//' 			<textarea class="textBox" rows="4" cols="15" style="width:100%; resize: none;"></textarea>' +
-					'   			<div class="prompt-error" style="display: none; color: #f00; font-size: 90%; margin-bottom: 4px;"></div>' +
-					'			</div>' +
-					'			<div class="modal-footer" style="padding: 9px 20px 10px;">' +
-					//'             <em class="reportStatus" style="text-align: left;float:left;display:none;font-size:85%;max-width:60px;">Submitting report...</em>' +
-					'   			<button type="button" style="padding: 3px 16px;" class="btn green btnPrompt-Submit">Submit</button>' +
-					'	    		<button type="button" style="padding: 3px 16px;" class="btn btn-danger btnPrompt-Cancel" data-dismiss="modal">Cancel</button>' +
-					'		    	<em class="reportStatus" style="text-align: right;display:block;font-size:85%;margin-top:10px;">Submitting report...</em>' +
-					'			</div>' +
-					'		</div>' +
-					'	</div>' +
-					'</div>';
+        prompt, jReportStatus,
+        btnSubmit, btnCancel, btnClose,
+        isPromptBoxReady = false,
+        defaultOptions = {
+            title: 'Message',
+            height: 0,
+            message: '',
+            placeholder: 'Write your message here...',
+            validation: 'You must write a message.',
+            onSubmit: function(prompt) {
+                // prompt.message
+                // prompt.close()
+            }
+        },
+        popupHTML = '<div class="modal fade" id="promptDialog" tabindex="-1" role="dialog" aria-labelledby="msgBoxTitle" aria-hidden="true">' +
+        '	<div class="modal-dialog">' +
+        '		<div class="modal-content">' +
+        '			<div class="modal-header" style="padding: 8px 15px;">' +
+        '   			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+        '	    		<h4 class="modal-title" id="promptDialogTitle"></h4>' +
+        '			</div>' +
+        '			<div class="modal-body" style="padding: 12px 20px;">' +
+        //' 			<textarea class="textBox" rows="4" cols="15" style="width:100%; resize: none;"></textarea>' +
+        '   			<div class="prompt-error" style="display: none; color: #f00; font-size: 90%; margin-bottom: 4px;"></div>' +
+        '			</div>' +
+        '			<div class="modal-footer" style="padding: 9px 20px 10px;">' +
+        //'             <em class="reportStatus" style="text-align: left;float:left;display:none;font-size:85%;max-width:60px;">Submitting report...</em>' +
+        '   			<button type="button" style="padding: 3px 16px;" class="btn green btnPrompt-Submit">Submit</button>' +
+        '	    		<button type="button" style="padding: 3px 16px;" class="btn btn-danger btnPrompt-Cancel" data-dismiss="modal">Cancel</button>' +
+        '		    	<em class="reportStatus" style="text-align: right;display:block;font-size:85%;margin-top:10px;">Submitting report...</em>' +
+        '			</div>' +
+        '		</div>' +
+        '	</div>' +
+        '</div>';
 
     function init(options) {
         if (isPromptBoxReady == false) {
@@ -291,8 +329,8 @@ Service.Prompt = (function (j) {
             jMsgTitleBar = jMsgBox.find('.modal-header');
             jMsgTitle = jMsgBox.find('#promptDialogTitle');
             jMsgBody = jMsgBox.find('.modal-body');
-            
-            if (options.height > 0) {
+
+            if (options.height && options.height > 0) {
                 jMsgBody.prepend('<textarea class="textBox form-control" rows="4" cols="15" style="width:100%; resize: none;"></textarea>');
             } else {
                 jMsgBody.prepend('<input class="textBox form-control" type="text" style="width:100%;" />');
@@ -304,13 +342,13 @@ Service.Prompt = (function (j) {
             btnCancel = jMsgBox.find('.btnPrompt-Cancel');
 
             prompt = {
-                close: function () {
+                close: function() {
                     //btnCancel.removeAttr().click();
                     jMsgBox.modal('hide');
                 }
             };
 
-            btnSubmit.click(function () {
+            btnSubmit.click(function() {
                 j.extend(prompt, {
                     message: jTextBox.val(),
                 });
@@ -335,23 +373,26 @@ Service.Prompt = (function (j) {
         // Shows a input dialog box with options (optional) provided as a JSON object.
         // - options: {
         // - - - title: 'Message',
+        // - - - height: 0,
+        // - - - message: '',
         // - - - placeholder: 'Write your message here...',
         // - - - validation: 'This field is required.',
-        // - - - onSubmit: function(message) {
-        // - - - 	// do something if clicked 'Submit'
+        // - - - onSubmit: function(prompt) {
+        // - - - 	// prompt.message
+        // - - - 	// prompt.close()
         // - - - }
         // - }
-        show: function (options) {
+        show: function(options) {
             j.extend(defaultOptions, options);
             init(defaultOptions);
 
             jMsgTitle.html(defaultOptions.title);
             jMsgBody.css('margin-top', 0);
 
-            if (defaultOptions.height > 0) {
+            if (defaultOptions.height || defaultOptions.height > 0) {
                 jTextBox.css('height', defaultOptions.height);
             }
-            jTextBox.attr('placeholder', defaultOptions.placeholder);
+            jTextBox.val(defaultOptions.message).attr('placeholder', defaultOptions.placeholder);
 
             jReportStatus.hide();
             btnSubmit.removeAttr('disabled');
@@ -359,54 +400,12 @@ Service.Prompt = (function (j) {
 
             jMsgBox.modal({
                 backdrop: 'static'
-            }).on('shown.bs.modal', function (e) {
+            }).on('shown.bs.modal', function(e) {
                 jTextBox.focus();
-            }).on('hidden.bs.modal', function (e) {
+            }).on('hidden.bs.modal', function(e) {
                 jTextBox.val("");
             });
 
-        }
-    }
-})(jQuery);
-
-Service.Masonry = (function (j) {
-    function initMasonry(_container) {
-        if (!j().masonry)
-            return;
-
-        var container = _container;
-        container.masonry();
-
-        container.imagesLoaded(function () {
-            container.masonry({
-                itemSelector: '.item'
-            });
-        });
-    }
-
-    function destroyMasonry(container) {
-        container.masonry('destroy');
-    }
-
-    return {
-        // Initialize the grid
-        init: function (container) {
-            initMasonry(j(container));
-        },
-
-        // Resets the grid
-        resizeGrid: function (container) {
-            initMasonry(j(container));
-        },
-
-        // Rearranges the grid with new items
-        update: function (container, newItems) {
-            j(container).masonry('appended', newItems);
-        },
-
-        // Removes grid layout functionality
-        destroy: function (container) {
-            destroyMasonry(j(container));
         }
     }
 })(jQuery);
@@ -420,7 +419,7 @@ Service.Loader = (function(j) {
     j(function() {
         _init();
 
-        j(document).ajaxSuccess(function () {
+        j(document).ajaxSuccess(function() {
             ajaxCall = true;
             _init();
         });
@@ -528,8 +527,8 @@ Service.Loader = (function(j) {
             _init();
         },
 
-        show: function (selector) {
-            j(selector).each(function (index, _el) {
+        show: function(selector) {
+            j(selector).each(function(index, _el) {
                 var el = j(_el),
                     options = el.data();
 
@@ -551,16 +550,16 @@ Service.Loader = (function(j) {
                         'height': el.outerHeight()
                     }).fadeIn();
 
-                    j(window).resize(function () {
+                    j(window).resize(function() {
                         //el_loader.hide();
 
                         //setTimeout(function () {
-                            el_loader.css({
-                                'top': el.offset().top,
-                                'left': el.offset().left,
-                                'width': el.outerWidth(),
-                                'height': el.outerHeight()
-                            });
+                        el_loader.css({
+                            'top': el.offset().top,
+                            'left': el.offset().left,
+                            'width': el.outerWidth(),
+                            'height': el.outerHeight()
+                        });
                         //}, 500);
                     }).resize();
                 } else {
@@ -569,8 +568,8 @@ Service.Loader = (function(j) {
             });
         },
 
-        hide: function (selector) {
-            j(selector).each(function (index, _el) {
+        hide: function(selector) {
+            j(selector).each(function(index, _el) {
                 //j('#' + j(el).css('opacity', 1).data('loader') + '_container').fadeOut();
 
                 var el = j(_el);
@@ -584,19 +583,137 @@ Service.Loader = (function(j) {
     }
 })(jQuery);
 
-var __scrollTo;
-(function (j) {
-	__scrollTo = function(el, margin) {
-		j('html, body').animate({
-			scrollTop: j(el).offset().top - (margin ? margin : 0)
-		});
-	}
+Services.Spinner = (function(j) {
+    var options = {},
+        spinner = {},
+        data = {};
+
+    function _init(parent) {
+        var defaultOptions = {
+                lines: 10, // The number of lines to draw
+                length: 0, // The length of each line
+                width: 5, // The line thickness
+                radius: 13, // The radius of the inner circle
+                scale: 1, // Scales overall size of the spinner
+                corners: 1, // Corner roundness (0..1)
+                color: '#000', // #rgb or #rrggbb or array of colors
+                opacity: 0, // Opacity of the lines
+                rotate: 0, // The rotation offset
+                direction: 1, // 1: clockwise, -1: counterclockwise
+                speed: 1, // Rounds per second
+                trail: 91, // Afterglow percentage
+                fps: 20, // Frames per second when using setTimeout() as a fallback for CSS
+                zIndex: 2e9, // The z-index (defaults to 2000000000)
+                className: 'spinner', // The CSS class to assign to the spinner
+                top: '50%', // Top position relative to parent
+                left: '50%', // Left position relative to parent
+                shadow: false, // Whether to render a shadow
+                hwaccel: true, // Whether to use hardware acceleration
+                position: 'absolute' // Element positioning
+            },
+            options = {},
+            target = (parent ? parent.filter('[data-loader]') : j('[data-loader]')).css('position', 'relative');
+
+        target.each(function(index, el) {
+            if (j(this).children('.spinner').length === 0) {
+                el = j(this);
+                data = el.data();
+
+                options = {};
+                j.extend(options, defaultOptions);
+
+                if (data) {
+                    if (data.spinner) {
+                        delete data.spinner;
+                    }
+
+                    if (data.width) {
+                        var newOptions = {
+                            width: parseInt(defaultOptions.width * data.width / 35),
+                            radius: parseInt(defaultOptions.radius * data.width / 35),
+                            scale: parseInt(defaultOptions.scale * data.width / 35)
+                        };
+
+                        j.extend(options, {
+                            width: (newOptions.width < 1 ? options.width : newOptions.width),
+                            radius: (newOptions.radius < 1 ? options.radius : newOptions.radius),
+                            scale: (newOptions.scale < 1 ? options.scale : newOptions.scale)
+                        });
+                    }
+                }
+                spinner = new Spinner(options).spin(el[0]);
+                el.data('spinner', spinner).css({
+                    width: data.width,
+                    height: data.width,
+                    margin: '0 auto'
+                });
+            }
+        });
+    }
+
+    return {
+        reset: function(container) {
+            if (container) {
+                _init(j(container));
+            } else {
+                _init();
+            }
+        },
+
+        show: function(selector) {
+            j(selector).each(function(index, _el) {
+                var el = j(_el),
+                    el_loader = el.find('[data-loader]');
+
+                el_loader.fadeIn();
+            });
+        },
+
+        hide: function(selector) {
+            j(selector).each(function(index, _el) {
+                var el = j(_el),
+                    el_loader = el.find('[data-loader]');
+
+                el_loader.fadeOut();
+            });
+        }
+    }
 })(jQuery);
 
-Service.ScrollTo = __scrollTo;
+Service.ScrollTo = (function(j) {
+    return function(el, margin) {
+        j('html, body').animate({
+            scrollTop: j(el).offset().top - (margin ? margin : 0)
+        });
+    }
+})(jQuery);
 
-var PasswordStrengthChecker;
+Service.PasswordChecker = window.PasswordStrengthChecker ? PasswordStrengthChecker : {
+    init: function() {
+        console.log('Password strength checker is not available. Please include passwordStrength.js...');
+    }
+};
 
-if (PasswordStrengthChecker) {
-    Service.PasswordChecker = PasswordStrengthChecker;
-}
+Service.ValidationFix = (function(j) {
+    return {
+        apply: function() {
+            j('form').each(function(index, form) {
+                j.extend(j(form).validate().settings, {
+                    ignore: ':hidden:not([class~=selectized]):not(.required), :hidden > .selectized, .selectize-control .selectize-input input'
+                });
+            });
+        }
+    };
+})(jQuery);
+
+
+
+(function(j) {
+    j(function() {
+        j(window).load(function() {
+            Service.WindowLoad.call();
+        }).resize(function() {
+            Service.WindowResize.call();
+        });
+    });
+})(jQuery);
